@@ -10,9 +10,9 @@
     if has("syntax")  
     syntax on " 语法高亮  
     endif  
-    colorscheme desert " elflord ron peachpuff default 设置配色方案，vim自带的配色方案保存在/usr/share/vim/vim72/colors目录下  
-      
-    " detect file type  
+	"colorscheme desert " elflord ron peachpuff default 设置配色方案，vim自带的配色方案保存在/usr/share/vim/vim72/colors目录下  
+	 colorscheme solarized
+	
     filetype on  
     filetype plugin on  
       
@@ -63,11 +63,11 @@
     set incsearch " 输入字符串就显示匹配点  
     set hlsearch
 
-	"set cursorline        "突出显示当前行"
+    set cursorline        "突出显示当前行"
 	"set cursorcolumn        "突出显示当前列"
 
 
-	hi LineNr ctermfg = darkgrey  
+	"hi LineNr ctermfg = darkgrey  
 	"设置行号的前景色
 	hi Number ctermfg = darkred
 	"hi Statement ctermfg =red
@@ -95,9 +95,10 @@
 	Plugin 'ctrlpvim/ctrlp.vim'
 	Plugin 'dyng/ctrlsf.vim'
 	Plugin 'majutsushi/tagbar'
-
+	Plugin 'scrooloose/syntastic'
 	call vundle#end()
 	filetype plugin indent on
+	
 
 
 	let g:ycm_server_python_interpreter='/usr/bin/python'
@@ -124,6 +125,12 @@
 	"回车即选中当前项"
 	"inoremap <expr> <CR>       pumvisible() ? '<C-y>' : '\<CR>'     
 	""上下左右键行为"
+	let g:syntastic_error_symbol = '✗'
+	let g:syntastic_warning_symbol = '⚠'
+	let g:syntastic_check_on_open=1
+	let g:syntastic_python_checkers=['pep8', 'pyflakes']
+	let g:syntastic_python_python_exe = 'python3'
+	
 	inoremap <expr> <Down>     pumvisible() ? '\<C-n>' : '\<Down>'
 	inoremap <expr> <Up>       pumvisible() ? '\<C-p>' : '\<Up>'
 	inoremap <expr> <PageDown> pumvisible() ? '\<PageDown>\<C-p>\<C-n>' : '\<PageDown>'
@@ -178,5 +185,19 @@ let g:rbpt_colorpairs = [ ['brown', 'RoyalBlue3'], ['Darkblue', 'SeaGreen3'], ['
 
 	map <F3> :TagbarToggle<CR>
 	let g:tagbar_width = 25
-	map f <Plug>CtrlSFPrompt
-	map F <Plug>CtrlSFQuickfixPrompt
+	"map f <Plug>CtrlSFPrompt
+	"map F <Plug>CtrlSFQuickfixPrompt
+	
+
+    let python_highlight_all=1
+
+	au BufNewFile,BufRead *.py
+	        \ set tabstop=4 |
+	        \ set tabstop=4 |
+	        \ set softtabstop=4 |
+	        \ set shiftwidth=4 |
+	        \ set textwidth=79 |
+	        \ set expandtab |
+	        \ set autoindent |
+	        \ set fileformat=unix
+
